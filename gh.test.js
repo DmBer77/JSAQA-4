@@ -10,13 +10,11 @@ afterAll(() => {
 
 describe('Github page tests', () => {
     beforeAll(async () => {
-        await page.goto('https://github.com/team/', {
-            waitUntil: 'load',
-            timeout: 120000,
-        });
+        await page.goto('https://github.com/team/');
     });
 
     test("The h1 header content'", async () => {
+        jest.setTimeout(30000);
         const firstLink = await page.$('header div div a');
         await firstLink.click();
         await page.waitForSelector('h1');
@@ -32,6 +30,7 @@ describe('Github page tests', () => {
     });
 
     test('The page contains Sign in button 1', async () => {
+        jest.setTimeout(60000);
         await page.goto('https://github.com/team');
 
         const btnSelector = '.btn-large-mktg.btn-mktg';
