@@ -1,5 +1,3 @@
-// const { TimeoutSettings } = require('puppeteer');
-
 let page;
 
 beforeAll(async () => {
@@ -12,8 +10,7 @@ afterAll(() => {
 
 describe('Github page tests', () => {
     beforeAll(async () => {
-        // page = await browser.newPage();
-        await page.goto('https://github.com/team', {
+        await page.goto('https://github.com/team/', {
             waitUntil: 'load',
             timeout: 120000,
         });
@@ -34,7 +31,9 @@ describe('Github page tests', () => {
         expect(actual).toEqual('#start-of-content');
     });
 
-    test('The page contains Sign in button', async () => {
+    test('The page contains Sign in button 1', async () => {
+        await page.goto('https://github.com/team');
+
         const btnSelector = '.btn-large-mktg.btn-mktg';
         await page.waitForSelector(btnSelector, {
             visible: true,
@@ -45,9 +44,9 @@ describe('Github page tests', () => {
 });
 
 test('Second h1 header content', async () => {
-    await page.goto('https://github.com/marketplace', {
+    await page.goto('https://github.com/marketplace/', {
         waitUntil: 'load',
-        timeout: 140000,
+        timeout: 10000,
     });
     await page.waitForSelector('h1');
     const title2 = await page.title();
@@ -57,19 +56,19 @@ test('Second h1 header content', async () => {
 });
 
 test('Third h1 header content', async () => {
-    await page.goto('https://github.com/explore', {
+    await page.goto('https://github.com/codespaces/', {
         waitUntil: 'load',
-        timeout: 140000,
+        timeout: 10000,
     });
     await page.waitForSelector('h1');
     const title2 = await page.title();
-    expect(title2).toEqual('Explore GitHub');
+    expect(title2).toEqual('Sign in to GitHub · GitHub');
 });
 
 test('Fourth h1 header content', async () => {
     await page.goto('https://github.com/', {
         waitUntil: 'load',
-        timeout: 0,
+        timeout: 15000,
     });
     await page.waitForSelector('h1');
     const title2 = await page.title();
